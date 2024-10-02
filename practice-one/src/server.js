@@ -18,12 +18,12 @@ dotenv.config();
 
 const PORT = process.env.PORT;
 const app = express();
-const { getUserById } = UserControllers(User);
+const { getUserById, createUser, deleteUser, updateUser } = UserControllers(User);
 
 middlewares(app);
 
 // Routes
-usersRouter({ app, getUserById });
+usersRouter({ app, getUserById, createUser, deleteUser, updateUser });
 
 /**
  * Starts the Express server and connects to the SQL database.
