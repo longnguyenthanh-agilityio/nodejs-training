@@ -32,7 +32,7 @@ const Users = db.sequelize.define("Users", {
 });
 
 Users.associate = (models) => {
-  Users.belongsTo(models.Tasks);
+  Users.belongsTo(models.Cards);
 };
 
 export default Users;
