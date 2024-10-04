@@ -4,26 +4,32 @@ import dotenv from "dotenv";
 // Libs
 import db from "./libs/db.js";
 import { middlewares } from "./libs/middlewares.js";
+import { passportAuth } from "./libs/auth.js";
 
 // Models
 import User from "./models/User.js";
 
 // Routers
 import { usersRouter } from "./routes/users.js";
+import { tokenRouter } from "./routes/token.js";
 
 // Controllers
 import { UserControllers } from "./controllers/user.js";
+import { TokenController } from "./controllers/token.js";
 
 dotenv.config();
 
 const PORT = process.env.PORT;
 const app = express();
+const authenticate = passportAuth(User).authenticate();
 const { getUserById, createUser, deleteUser, updateUser } = UserControllers(User);
+const { createToken } = TokenController(User);
 
-middlewares(app);
+middlewares(app, User);
 
 // Routes
-usersRouter({ app, getUserById, createUser, deleteUser, updateUser });
+usersRouter({ app, authenticate, getUserById, createUser, deleteUser, updateUser });
+tokenRouter({ app, createToken });
 
 /**
  * Starts the Express server and connects to the SQL database.

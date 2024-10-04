@@ -1,5 +1,17 @@
-export const usersRouter = ({ app, getUserById, createUser, deleteUser, updateUser }) => {
+export const usersRouter = ({
+  app,
+  authenticate,
+  getUserById,
+  createUser,
+  deleteUser,
+  updateUser,
+}) => {
   app.route("/users").post(createUser);
 
-  app.route("/users/:id").get(getUserById).delete(deleteUser).put(updateUser);
+  app
+    .route("/users/:id")
+    .all(authenticate)
+    .get(authenticate, getUserById)
+    .delete(deleteUser)
+    .put(updateUser);
 };
