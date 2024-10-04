@@ -1,4 +1,5 @@
 export const MESSAGES = {
+  UNAUTHORIZED_FAIL: "Missing email or password!",
   Z_ENERGY_COST: 'zEnergyCost must start with "z-"',
   USER_UPDATED: "User has been updated!",
   USER_DELETED: "User has been deleted!",

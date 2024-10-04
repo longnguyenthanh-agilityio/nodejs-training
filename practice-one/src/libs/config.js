@@ -1,3 +1,7 @@
+import dotenv from "dotenv";
+
+dotenv.config();
+
 export const config = {
   database: "dragon-ball",
   username: "",
@@ -9,4 +13,6 @@ export const config = {
       underscored: true,
     },
   },
+  jwtSecret: process.env.JWT_SECRET,
+  jwtSession: { session: false },
 };
