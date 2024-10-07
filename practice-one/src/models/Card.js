@@ -2,10 +2,10 @@ import { DataTypes } from "sequelize";
 import db from "../libs/db.js";
 
 // Constants
-import { CARD_TYPE } from "../constants/card.js";
+import { CARD_TYPES } from "../constants/card.js";
 import { MESSAGES } from "../constants/message.js";
 
-const Cards = db.sequelize.define("Cards", {
+const Card = db.sequelize.define("Card", {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -16,7 +16,7 @@ const Cards = db.sequelize.define("Cards", {
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
-      isIn: [CARD_TYPE],
+      isIn: [CARD_TYPES],
     },
   },
   color: {
@@ -26,6 +26,12 @@ const Cards = db.sequelize.define("Cards", {
     },
   },
   cardName: {
+    type: DataTypes.STRING,
+    validate: {
+      notEmpty: true,
+    },
+  },
+  textBox: {
     type: DataTypes.STRING,
     validate: {
       notEmpty: true,
@@ -55,31 +61,31 @@ const Cards = db.sequelize.define("Cards", {
   },
   comboPower: {
     type: DataTypes.INTEGER,
-    defaultValue: false,
+    defaultValue: null,
   },
   comboCost: {
     type: DataTypes.INTEGER,
-    defaultValue: false,
+    defaultValue: null,
   },
   characterName: {
     type: DataTypes.STRING,
-    defaultValue: false,
+    defaultValue: null,
   },
   specialTrait: {
     type: DataTypes.STRING,
-    defaultValue: false,
+    defaultValue: null,
   },
   era: {
     type: DataTypes.STRING,
-    defaultValue: false,
+    defaultValue: null,
   },
-  Illustration: {
+  illustration: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: false,
   },
   cardNumber: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     validate: {
       notEmpty: true,
     },
@@ -92,7 +98,7 @@ const Cards = db.sequelize.define("Cards", {
   },
   block: {
     type: DataTypes.STRING,
-    defaultValue: false,
+    defaultValue: null,
   },
   bundlingNumber: {
     type: DataTypes.INTEGER,
@@ -102,12 +108,16 @@ const Cards = db.sequelize.define("Cards", {
   },
   copyrightNotice: {
     type: DataTypes.STRING,
-    defaultValue: false,
+    defaultValue: null,
+  },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
   },
 });
 
-Cards.associate = (models) => {
-  Cards.belongsTo(models.Users);
+Card.associate = (models) => {
+  Card.belongsTo(models.User);
 };
 
-export default Cards;
+export default Card;

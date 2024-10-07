@@ -2,8 +2,8 @@ import { DataTypes } from "sequelize";
 import bcrypt from "bcrypt";
 import db from "../libs/db.js";
 
-const Users = db.sequelize.define(
-  "Users",
+const User = db.sequelize.define(
+  "User",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -43,12 +43,12 @@ const Users = db.sequelize.define(
   },
 );
 
-Users.associate = (models) => {
-  Users.belongsTo(models.Cards);
+User.associate = (models) => {
+  User.belongsTo(models.Card);
 };
 
-Users.isPassword = (encodedPassword, password) => {
+User.isPassword = (encodedPassword, password) => {
   return bcrypt.compareSync(password, encodedPassword);
 };
 
-export default Users;
+export default User;

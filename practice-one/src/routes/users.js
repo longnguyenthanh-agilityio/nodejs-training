@@ -8,10 +8,5 @@ export const usersRouter = ({
 }) => {
   app.route("/users").post(createUser);
 
-  app
-    .route("/users/:id")
-    .all(authenticate)
-    .get(authenticate, getUserById)
-    .delete(deleteUser)
-    .put(updateUser);
+  app.route("/users/:id").all(authenticate).get(getUserById).delete(deleteUser).put(updateUser);
 };
