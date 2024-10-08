@@ -5,6 +5,8 @@ import dotenv from "dotenv";
 import db from "./libs/db.js";
 import { middlewares } from "./libs/middlewares.js";
 import { passportAuth } from "./libs/auth.js";
+import { errorHandler } from "./libs/errorHandler.js";
+import { cardValidations } from "./libs/cardValidations.js";
 
 // Models
 import User from "./models/User.js";
@@ -33,8 +35,19 @@ middlewares(app, User);
 
 // Routes
 usersRouter({ app, authenticate, getUserById, createUser, deleteUser, updateUser });
-cardsRouter({ app, authenticate, getCardList, createCard, updateCard, deleteCard, getCardById });
+cardsRouter({
+  app,
+  authenticate,
+  getCardList,
+  createCard,
+  cardValidations,
+  updateCard,
+  deleteCard,
+  getCardById,
+});
 tokenRouter({ app, createToken });
+
+app.use(errorHandler);
 
 /**
  * Starts the Express server and connects to the SQL database.
