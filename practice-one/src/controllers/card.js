@@ -1,13 +1,69 @@
+import { Op } from "sequelize";
+
 import { MESSAGES } from "../constants/message.js";
 import { HTTP_STATUS } from "../constants/http-status-code.js";
 
 export const CardControllers = (cardModel) => {
   return {
-    // TODO: Will update in next MR
+    /**
+     * Get a list of cards with pagination and filtering options.
+     *
+     * @param {Object} req - The request object, containing query parameters for filtering and pagination.
+     * @param {Object} res - The response object.
+     * @param {Function} next - The next middleware function.
+     * @returns {Promise<void>} Responds with paginated and filtered card list or passes error to the next middleware.
+     */
     getCardList: async (req, res, next) => {
+      const { page = 1, limit = 10, ...filters } = req.query;
+      const offset = (page - 1) * limit;
+
+      // Dynamically build filter based on available query parameters
+      const filter = Object.keys(filters).reduce((acc, key) => {
+        if (filters[key]) {
+          switch (key) {
+            case "cardType":
+            case "power":
+            case "comboPower":
+            case "bundlingNumber":
+              acc[key] = filters[key];
+              break;
+            case "cardName":
+            case "zEnergyCost":
+            case "characterName":
+            case "era":
+            case "cardNumber":
+            case "rarity":
+              acc[key] = { [Op.like]: `%${filters[key]}%` };
+              break;
+            default:
+              break;
+          }
+        }
+        return acc;
+      }, {});
+
       try {
-        const response = await cardModel.findAll();
-        res.json(response);
+        const { count, rows } = await cardModel.findAndCountAll({
+          where: filter,
+          limit: parseInt(limit),
+          offset: parseInt(offset),
+          order: [["createdAt", "DESC"]],
+        });
+
+        const totalPages = Math.ceil(count / limit);
+        const nextPage = page < totalPages ? page + 1 : null;
+        const previousPage = page > 1 ? page - 1 : null;
+
+        return res.status(HTTP_STATUS.OK).json({
+          cards: rows,
+          pagination: {
+            totalPages,
+            totalItems: count,
+            currentPage: parseInt(page, 10),
+            nextPage,
+            previousPage,
+          },
+        });
       } catch (error) {
         next(error);
       }

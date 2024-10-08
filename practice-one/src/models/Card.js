@@ -16,6 +16,12 @@ const Card = db.sequelize.define("Card", {
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
+      // Check if cardType starts with 'z-' if zEnergyCost is present
+      startsWithZIfZEnergyCost(value) {
+        if (this.zEnergyCost && !value.startsWith("z-")) {
+          throw new Error(MESSAGES.CARD_TYPE_Z_REQUIRED);
+        }
+      },
       isIn: [CARD_TYPES],
     },
   },
@@ -44,14 +50,8 @@ const Card = db.sequelize.define("Card", {
     },
   },
   zEnergyCost: {
-    type: DataTypes.STRING,
-    validate: {
-      startsWithZ(value) {
-        if (!value.startsWith("z-")) {
-          throw new Error(MESSAGES.Z_ENERGY_COST);
-        }
-      },
-    },
+    type: DataTypes.INTEGER,
+    defaultValue: null,
   },
   power: {
     type: DataTypes.INTEGER,
