@@ -8,3 +8,12 @@ export const CARD_TYPES = [
   "z-extras",
   "z-unisons",
 ];
+
+export const REQUIRE_FIELD = {
+  color: "string",
+  cardName: "string",
+  power: "number",
+  cardNumber: "number",
+  rarity: "number",
+  bundlingNumber: "number",
+};

@@ -1,10 +1,6 @@
 import { DataTypes } from "sequelize";
 import db from "../libs/db.js";
 
-// Constants
-import { CARD_TYPES } from "../constants/card.js";
-import { MESSAGES } from "../constants/message.js";
-
 const Card = db.sequelize.define("Card", {
   id: {
     type: DataTypes.UUID,
@@ -16,13 +12,7 @@ const Card = db.sequelize.define("Card", {
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
-      // Check if cardType starts with 'z-' if zEnergyCost is present
-      startsWithZIfZEnergyCost(value) {
-        if (this.zEnergyCost && !value.startsWith("z-")) {
-          throw new Error(MESSAGES.CARD_TYPE_Z_REQUIRED);
-        }
-      },
-      isIn: [CARD_TYPES],
+      notEmpty: true,
     },
   },
   color: {
