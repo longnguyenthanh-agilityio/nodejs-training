@@ -106,8 +106,14 @@ const Card = db.sequelize.define("Card", {
   },
 });
 
+// Associations
 Card.associate = (models) => {
-  Card.belongsTo(models.User);
+  if (models.User) {
+    Card.belongsTo(models.User, {
+      foreignKey: "userId",
+      as: "primaryUser",
+    });
+  }
 };
 
 export default Card;
