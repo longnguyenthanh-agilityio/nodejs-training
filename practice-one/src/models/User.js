@@ -44,7 +44,12 @@ const User = db.sequelize.define(
 );
 
 User.associate = (models) => {
-  User.belongsTo(models.Card);
+  if (models.Card) {
+    User.hasMany(models.Card, {
+      foreignKey: "userId",
+      as: "primaryCards",
+    });
+  }
 };
 
 User.isPassword = (encodedPassword, password) => {

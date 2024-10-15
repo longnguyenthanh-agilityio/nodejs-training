@@ -99,12 +99,12 @@ export const CardControllers = (cardModel) => {
        * @returns {Promise<void>} Responds with a success message or passes the error to the next middleware.
        */
       try {
-        await cardModel.update(req.body, {
+        const cardUpdated = await cardModel.update(req.body, {
           where: {
             id: req.params.id,
           },
         });
-        res.status(HTTP_STATUS.OK).json({ message: MESSAGES.CARD_UPDATED });
+        res.status(HTTP_STATUS.OK).json(cardUpdated);
       } catch (error) {
         next(error);
       }
@@ -151,7 +151,7 @@ export const CardControllers = (cardModel) => {
         }
 
         // Send success response if card is deleted
-        return res.status(HTTP_STATUS.OK).json({ message: MESSAGES.CARD_DELETED });
+        return res.status(HTTP_STATUS.OK);
       } catch (error) {
         return next(error);
       }

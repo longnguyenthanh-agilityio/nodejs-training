@@ -54,12 +54,12 @@ export const UserControllers = (userModel) => {
      */
     updateUser: async (req, res, next) => {
       try {
-        await userModel.update(req.body, {
+        const userUpdated = await userModel.update(req.body, {
           where: {
             id: req.params.id,
           },
         });
-        res.status(HTTP_STATUS.OK).json({ message: MESSAGES.USER_UPDATED });
+        res.status(HTTP_STATUS.OK).json(userUpdated);
       } catch (error) {
         next(error);
       }
@@ -82,7 +82,7 @@ export const UserControllers = (userModel) => {
         }
 
         // Send success response if user is deleted
-        return res.status(HTTP_STATUS.OK).json({ message: MESSAGES.USER_DELETED });
+        return res.status(HTTP_STATUS.OK);
       } catch (error) {
         return next(error);
       }

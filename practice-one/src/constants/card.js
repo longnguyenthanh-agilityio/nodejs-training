@@ -13,7 +13,7 @@ export const REQUIRE_FIELD = {
   color: "string",
   cardName: "string",
   power: "number",
-  cardNumber: "number",
-  rarity: "number",
+  cardNumber: "string",
+  rarity: "string",
   bundlingNumber: "number",
 };
