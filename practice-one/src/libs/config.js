@@ -8,7 +8,7 @@ export const config = {
   password: "",
   params: {
     dialect: "sqlite",
-    storage: "dragon-ball.sqlite",
+    storage: "db/dragon-ball.sqlite",
     define: {
       underscored: true,
     },

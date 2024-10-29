@@ -1,0 +1,33 @@
+services:
+  dragonball-app-dev:
+    build: .
+    container_name: dragonball-app-dev
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
+    volumes:
+      - dragonball-db-dev:/app/db
+    working_dir: /app
+    command: yarn dev
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /app/src
+          ignore:
+            - node_modules/
+  dragonball-app-prod:
+    build: .
+    container_name: dragonball-app-prod
+    env_file:
+      - .env.production
+    ports:
+      - 4000:4000
+    volumes:
+      - dragonball-db-prod:/app/db
+    working_dir: /app
+    command: yarn start
+volumes:
+  dragonball-db-dev:
+  dragonball-db-prod:
