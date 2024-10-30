@@ -23,14 +23,7 @@ EXPOSE 3000
 CMD ["yarn", "dev"]
 
 # -------------------------------------------------------------
-# Stage 3: Test Image
-FROM build AS test
-
-# Start the application in test mode
-CMD ["yarn", "test"]
-
-# -------------------------------------------------------------
-# Stage 4: Production Image
+# Stage 3: Production Image
 FROM build AS production
 
 # Install only production dependencies
