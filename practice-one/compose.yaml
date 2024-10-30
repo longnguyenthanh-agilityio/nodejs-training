@@ -1,9 +1,12 @@
 services:
   dragonball-app-dev:
-    build: .
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: development
     container_name: dragonball-app-dev
     env_file:
-      - .env
+      - .env.development
     ports:
       - 3000:3000
     volumes:
@@ -17,8 +20,21 @@ services:
           target: /app/src
           ignore:
             - node_modules/
+  dragonball-app-test:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: test
+    container_name: dragonball-app-test
+    env_file:
+      - .env.test
+    working_dir: /app
+    command: yarn test
   dragonball-app-prod:
-    build: .
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: production
     container_name: dragonball-app-prod
     env_file:
       - .env.production

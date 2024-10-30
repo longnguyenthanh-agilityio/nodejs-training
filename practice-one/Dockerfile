@@ -1,11 +1,10 @@
 ARG NODE_VERSION=18.17.1 
-# Stage 1: Install all dependencies (dev + prod)
-FROM node:${NODE_VERSION} AS build
+FROM node:${NODE_VERSION}-alpine AS build
 
 WORKDIR /app
 
 # Copy package manager files to avoid cache invalidation on code changes
-COPY package.json yarn.lock ./
+COPY package*.json ./
 
 # Install all dependencies
 RUN yarn install
@@ -15,13 +14,7 @@ COPY . .
 
 # -------------------------------------------------------------
 # Stage 2: Development Image
-FROM node:${NODE_VERSION} AS development
-
-WORKDIR /app
-
-# Copy node_modules and the application from the build stage
-COPY --from=build /app/node_modules ./node_modules
-COPY --from=build /app .
+FROM build AS development
 
 # Expose the development port
 EXPOSE 3000
@@ -30,11 +23,18 @@ EXPOSE 3000
 CMD ["yarn", "dev"]
 
 # -------------------------------------------------------------
+# Stage 3: Test Image
+FROM build AS test
+
+# Start the application in test mode
+CMD ["yarn", "test"]
+
+# -------------------------------------------------------------
 # Stage 3: Production Image
-FROM node:${NODE_VERSION} AS production
+FROM build AS production
 
 # Install only production dependencies
-RUN yarn install --production --ignore-scripts && yarn cache clean
+RUN yarn install --production --ignore-scripts
 
 # Expose the production port
 EXPOSE 4000

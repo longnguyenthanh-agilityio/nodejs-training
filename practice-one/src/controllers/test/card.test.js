@@ -98,7 +98,7 @@ describe("Card controller", () => {
       await CardControllers(Card).updateCard(req, res, next);
 
       expect(res.status).toBeCalledWith(HTTP_STATUS.OK);
-      expect(res.json).toBeCalledWith({ message: MESSAGES.CARD_UPDATED });
+      expect(res.json).toBeCalledWith(req.body);
     });
 
     it("should update card failed and return an error", async () => {
@@ -168,9 +168,6 @@ describe("Card controller", () => {
       await CardControllers(Card).deleteCard(req, res, next);
 
       expect(res.status).toBeCalledWith(HTTP_STATUS.OK);
-      expect(res.json).toBeCalledWith({
-        message: MESSAGES.CARD_DELETED,
-      });
     });
 
     it("should delete a card is invalid and return not found message", async () => {

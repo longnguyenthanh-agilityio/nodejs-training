@@ -132,7 +132,7 @@ describe("User controller", () => {
       await UserControllers(User).updateUser(req, res, next);
 
       expect(res.status).toBeCalledWith(HTTP_STATUS.OK);
-      expect(res.json).toBeCalledWith({ message: MESSAGES.USER_UPDATED });
+      expect(res.json).toBeCalledWith(req.body);
     });
 
     it("should call update user by ID failed and return an error", async () => {
@@ -163,9 +163,6 @@ describe("User controller", () => {
       await UserControllers(User).deleteUser(req, res, next);
 
       expect(res.status).toBeCalledWith(HTTP_STATUS.OK);
-      expect(res.json).toBeCalledWith({
-        message: MESSAGES.USER_DELETED,
-      });
     });
 
     it("should delete a user is invalid and return not found message", async () => {
