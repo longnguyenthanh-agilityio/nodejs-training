@@ -16,4 +16,5 @@ jobs:
       - name: Build the Docker image
         run: docker build ./practice-one/ -t longlong569/practice-one:latest
       - name: Push image to Docker hub
-        run: docker push longlong569/practice-one:latest
+        run: docker login -u longlong569 -p ${{ secrets.DOCKER_HUB_TOKEN }}
+          docker push longlong569/practice-one:latest
