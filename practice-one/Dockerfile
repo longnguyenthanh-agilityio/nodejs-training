@@ -30,7 +30,7 @@ FROM build AS test
 CMD ["yarn", "test"]
 
 # -------------------------------------------------------------
-# Stage 3: Production Image
+# Stage 4: Production Image
 FROM build AS production
 
 # Install only production dependencies

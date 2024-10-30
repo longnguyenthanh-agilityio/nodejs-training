@@ -9,8 +9,8 @@ export const TokenController = (UserModel) => {
   return {
     createToken: async (req, res, next) => {
       const { email, password } = req.body;
-
       const isValidateCredentials = !email || !password;
+
       if (isValidateCredentials) {
         res.status(HTTP_STATUS.UNAUTHORIZED);
 
@@ -22,7 +22,6 @@ export const TokenController = (UserModel) => {
 
         if (UserModel.isPassword(user.password, password)) {
           const payload = { id: user.id };
-
           res.json({
             token: jwt.encode(payload, config.jwtSecret),
           });

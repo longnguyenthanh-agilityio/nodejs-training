@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint .",
     "prepare": "cd .. && husky install practice-one/.husky",
-    "test": "node --experimental-vm-modules  --trace-warnings node_modules/jest/bin/jest.js",
+    "test": "node --experimental-vm-modules  --trace-warnings node_modules/jest/bin/jest.js --coverage",
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
     "pre-commit": "lint-staged"
