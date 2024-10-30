@@ -14,6 +14,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build the Docker image
-        run: docker build -t ./practice-one/ longlong569/practice-one:latest
+        run: docker build ./practice-one/ -t longlong569/practice-one:latest
       - name: Push image to Docker hub
         run: docker push longlong569/practice-one:latest
