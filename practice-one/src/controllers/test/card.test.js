@@ -2,24 +2,20 @@ import { jest } from "@jest/globals";
 import db from "../../libs/db.js";
 
 // Controllers
-import { CardControllers } from "../../controllers/card.js";
+import { CardControllers } from "../card.js";
 
 // Constants
 import { HTTP_STATUS } from "../../constants/http-status-code.js";
 import { CARD_INFO, CARDS, CARD_QUERY } from "../../constants/mocks/card.js";
 import { MESSAGES } from "../../constants/message.js";
 
-jest.unstable_mockModule("../../models/card.js", () => {
-  return {
-    default: {
-      findAndCountAll: jest.fn(),
-      findByPk: jest.fn(),
-      destroy: jest.fn(),
-      create: jest.fn(),
-      update: jest.fn(),
-    },
-  };
-});
+jest.unstable_mockModule("../../models/Card.js", () => ({
+  findAndCountAll: jest.fn(),
+  findByPk: jest.fn(),
+  destroy: jest.fn(),
+  create: jest.fn(),
+  update: jest.fn(),
+}));
 
 describe("Card controller", () => {
   let res, next, Card;
@@ -40,7 +36,7 @@ describe("Card controller", () => {
 
     next = jest.fn();
 
-    Card = (await import("../../models/Card.js")).default;
+    Card = await import("../../models/Card.js");
   });
 
   afterEach(() => {

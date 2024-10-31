@@ -9,7 +9,7 @@ import { HTTP_STATUS } from "../../constants/http-status-code.js";
 import { USER_INFO } from "../../constants/mocks/user.js";
 import { MESSAGES } from "../../constants/message.js";
 
-jest.unstable_mockModule("../../models/user.js", () => {
+jest.unstable_mockModule("../../models/User.js", () => {
   return {
     default: {
       findOne: jest.fn(),

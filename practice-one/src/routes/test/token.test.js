@@ -11,7 +11,7 @@ import { USER_INFO } from "../../constants/mocks/user.js";
 // Controllers
 import { TokenController } from "../../controllers/token.js";
 
-jest.unstable_mockModule("../../models/user.js", () => {
+jest.unstable_mockModule("../../models/User.js", () => {
   return {
     default: {
       findOne: jest.fn(),
