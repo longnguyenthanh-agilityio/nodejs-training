@@ -24,7 +24,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-      target: development
+      target: test
     container_name: dragonball-app-test
     env_file:
       - .env.test
