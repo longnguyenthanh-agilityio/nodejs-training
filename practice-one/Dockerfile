@@ -20,6 +20,7 @@ FROM build AS development
 EXPOSE 3000
 
 # Start the application in development mode
+# Test
 CMD ["yarn", "dev"]
 
 # -------------------------------------------------------------
