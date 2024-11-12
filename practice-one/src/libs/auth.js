@@ -1,5 +1,6 @@
 import passport from "passport";
-import { Strategy, ExtractJwt } from "passport-jwt";
+import { ExtractJwt } from "passport-jwt";
+import { Strategy } from "passport-local";
 import { config } from "./config.js";
 
 export const passportAuth = (UserModel) => {
