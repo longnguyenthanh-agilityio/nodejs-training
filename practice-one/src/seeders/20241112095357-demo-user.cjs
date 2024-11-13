@@ -9,6 +9,8 @@ module.exports = {
         name: "John Doe",
         email: "john@example.com",
         password: "123123",
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     ]);
   },

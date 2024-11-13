@@ -10,6 +10,9 @@
     "test": "node --experimental-vm-modules  --trace-warnings node_modules/jest/bin/jest.js --coverage",
     "migrate:up": "yarn sequelize-cli db:migrate",
     "migrate:undo": "yarn sequelize-cli db:migrate:undo",
+    "migrate-all:undo": "yarn sequelize-cli db:migrate:undo:all",
+    "seed-all:up": "sequelize-cli db:seed:all",
+    "seed-all:undo": "sequelize-cli db:seed:undo:all",
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
     "pre-commit": "lint-staged"
