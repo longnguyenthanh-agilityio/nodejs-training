@@ -4,12 +4,29 @@
   "description": "When you're ready, start your application by running: `docker compose up --build`.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepare": "cd .. && husky install doctor-hurt-database/.husky",
+    "pre-commit": "lint-staged"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@faker-js/faker": "^9.3.0",
     "postgres": "^3.4.5"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }
