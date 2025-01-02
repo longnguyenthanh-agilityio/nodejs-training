@@ -1,9 +1,11 @@
 {
   "name": "doctor-hurt-database",
   "version": "1.0.0",
+  "type": "module",
   "description": "When you're ready, start your application by running: `docker compose up --build`.",
   "main": "index.js",
   "scripts": {
+    "start": "node src/server.js",
     "prepare": "cd .. && husky install doctor-hurt-database/.husky",
     "pre-commit": "lint-staged"
   },
@@ -11,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@faker-js/faker": "^9.3.0",
+    "dotenv": "^16.4.7",
     "postgres": "^3.4.5"
   },
   "devDependencies": {
