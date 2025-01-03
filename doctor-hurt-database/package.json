@@ -5,7 +5,7 @@
   "description": "When you're ready, start your application by running: `docker compose up --build`.",
   "main": "index.js",
   "scripts": {
-    "start": "node src/server.js",
+    "setup-db": "node src/server.js",
     "prepare": "cd .. && husky install doctor-hurt-database/.husky",
     "pre-commit": "lint-staged"
   },

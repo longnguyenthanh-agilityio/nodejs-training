@@ -1,8 +1,8 @@
 // users.js
-import sql from "./libs/db.js";
+import sql from "../libs/db.js";
 import { faker } from "@faker-js/faker";
 
-const insertUsers = async (count = 1000) => {
+const insertUsers = async (count = 990) => {
   try {
     const promises = Array.from({ length: count }, async () => {
       const userId = faker.string.uuid();
