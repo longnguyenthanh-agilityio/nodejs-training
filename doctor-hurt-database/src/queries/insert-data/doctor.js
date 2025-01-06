@@ -1,20 +1,19 @@
 import sql from "../../libs/db.js";
 import { faker } from "@faker-js/faker";
 
-export const insertDoctors = async (count = 100) => {
+export const insertDoctors = async (count = 10) => {
   try {
     const doctorUsers = await sql`
       SELECT user_id FROM "user"
-      WHERE role = 'doctor'
+      WHERE role = 'doctor' AND user_id NOT IN ( SELECT user_id FROM doctor)
       LIMIT ${count}
     `;
 
     if (doctorUsers.length === 0) {
       console.log("No new doctor users to insert.");
-      return;
+      return await sql.end();
     }
 
-    // Step 2: Generate doctor-specific data
     const doctorData = doctorUsers.map((user) => {
       return {
         doctor_id: faker.string.uuid(),
@@ -33,7 +32,7 @@ export const insertDoctors = async (count = 100) => {
 
     // Step 3: Insert into the doctor table
     const insertQueries = doctorData.map(
-      (doctor) =>
+      (d) =>
         sql`
         INSERT INTO doctor (
           doctor_id,
@@ -46,15 +45,15 @@ export const insertDoctors = async (count = 100) => {
           booking_success,
           booking_cancel
         ) VALUES (
-          ${doctor.doctor_id},
-          ${doctor.user_id},
-          ${doctor.rating_point},
-          ${doctor.specialization},
-          ${doctor.experience_years},
-          ${doctor.qualification},
-          ${doctor.price},
-          ${doctor.booking_success},
-          ${doctor.booking_cancel}
+          ${d.doctor_id},
+          ${d.user_id},
+          ${d.rating_point},
+          ${d.specialization},
+          ${d.experience_years},
+          ${d.qualification},
+          ${d.price},
+          ${d.booking_success},
+          ${d.booking_cancel}
         )
       `,
     );

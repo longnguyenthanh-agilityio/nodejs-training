@@ -3,7 +3,7 @@ import sql from "../../libs/db.js";
 export const createUserTable = async () => {
   try {
     await sql`
-     CREATE TYPE user_role AS ENUM ('customer', 'doctor');
+     CREATE TYPE user_role AS ENUM ('patient', 'doctor');
    `;
 
     await sql`

@@ -2,7 +2,7 @@
 import sql from "../../libs/db.js";
 import { faker } from "@faker-js/faker";
 
-const insertUsers = async (count = 990) => {
+const insertUsers = async (count = 30) => {
   try {
     const promises = Array.from({ length: count }, async () => {
       const user_id = faker.string.uuid();
@@ -12,7 +12,7 @@ const insertUsers = async (count = 990) => {
       const date_of_birth = faker.date.birthdate({ min: 18, max: 65, mode: "age" });
       const email = faker.internet.email();
       const password = faker.internet.password();
-      const role = faker.helpers.arrayElement(["customer", "doctor"]);
+      const role = faker.helpers.arrayElement(["patient", "doctor"]);
 
       return sql`
           INSERT INTO "user" (user_id, name, phone_number, address, date_of_birth, email, password, role)

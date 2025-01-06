@@ -1,5 +1,5 @@
 -- Step 1: Create ENUM type for the 'role' column
-CREATE TYPE user_role AS ENUM ('customer', 'doctor');
+CREATE TYPE user_role AS ENUM ('patient', 'doctor');
 
 -- Step 2: Create the table
 CREATE TABLE "user" (
