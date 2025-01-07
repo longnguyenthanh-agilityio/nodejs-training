@@ -90,7 +90,6 @@ CREATE TABLE favorite (
     CONSTRAINT fk_favorite_patient FOREIGN KEY (patient_id)
     REFERENCES patient(patient_id)
     ON DELETE CASCADE,
-    CONSTRAINT unique_favorite UNIQUE (doctor_id, patient_id) -- Ensure one-to-one relationship
 );
 
 -- step 9: Create ENUM type for the 'status' and 'type' column

@@ -27,7 +27,7 @@ const insertTransactions = async (count = 10) => {
 
     await Promise.all(promises);
 
-    console.log(`${count} transactions inserted successfully!`);
+    console.log(`${bookingIds.length || count} transactions inserted successfully!`);
   } catch (error) {
     console.error("Error inserting transactions:", error);
   } finally {

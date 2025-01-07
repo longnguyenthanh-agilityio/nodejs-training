@@ -16,15 +16,15 @@ const insertReviews = async (count = 10) => {
     const maxReviews = Math.min(count, doctorIds.length * patientIds.length);
 
     const reviews = Array.from({ length: maxReviews }, () => {
-      const doctorId = faker.helpers.arrayElement(doctorIds).doctor_id;
-      const patientId = faker.helpers.arrayElement(patientIds).patient_id;
+      const doctor_id = faker.helpers.arrayElement(doctorIds).doctor_id;
+      const patient_id = faker.helpers.arrayElement(patientIds).patient_id;
       const rating = faker.number.int({ min: 1, max: 5 }); // Random rating between 1 and 5
-      const reviewText = faker.lorem.sentence(); // Random review text
-      const createdAt = faker.date.recent({ days: 30 }); // Random date within the last 30 days
+      const review_text = faker.lorem.sentence();
+      const created_at = faker.date.recent({ days: 30 });
 
       return sql`
         INSERT INTO review (id, doctor_id, patient_id, rating, review_text, created_at)
-        VALUES (${faker.string.uuid()}, ${doctorId}, ${patientId}, ${rating}, ${reviewText}, ${createdAt});
+        VALUES (${faker.string.uuid()}, ${doctor_id}, ${patient_id}, ${rating}, ${review_text}, ${created_at});
       `;
     });
 

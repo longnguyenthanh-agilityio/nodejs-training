@@ -1,7 +1,7 @@
 import sql from "../../libs/db.js";
 import { faker } from "@faker-js/faker";
 
-const insertBookings = async (count = 10) => {
+const insertBookings = async (count = 5) => {
   try {
     // Fetch valid doctor IDs
     const doctors = await sql`SELECT doctor_id FROM doctor`;
@@ -53,7 +53,7 @@ const insertBookings = async (count = 10) => {
       ),
     );
 
-    console.log(`${count} bookings inserted successfully!`);
+    console.log(`${bookings.length || count} bookings inserted successfully!`);
   } catch (error) {
     console.error("Error inserting booking data:", error);
   } finally {

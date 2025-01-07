@@ -30,7 +30,7 @@ export const insertPatients = async (count = 10) => {
 
     await Promise.all(insertQueries);
 
-    console.log(`${patientData.length} fake patients inserted successfully!`);
+    console.log(`${patientData.length || count} fake patients inserted successfully!`);
   } catch (error) {
     console.error("Error inserting fake patients:", error);
   } finally {

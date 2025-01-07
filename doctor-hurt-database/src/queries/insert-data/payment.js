@@ -31,7 +31,7 @@ const insertPayments = async (count = 10) => {
 
     await Promise.all(promises);
 
-    console.log(`${count} payments inserted successfully!`);
+    console.log(`${existingTransactionIdSet.length || count} payments inserted successfully!`);
   } catch (error) {
     console.error("Error inserting payments:", error);
   } finally {
