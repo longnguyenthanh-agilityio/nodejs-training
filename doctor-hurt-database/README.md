@@ -57,7 +57,9 @@ docker-compose up --build
 
 - Note: Before build run command build docker, should open docker desktop first!
 
-6. Stop and remove containers, networks, and volumes
+6. Sign in pgAdmin with your password
+
+7. Stop and remove containers, networks, and volumes
 
 ```
 docker compose down
@@ -84,3 +86,11 @@ Regarding database relationships, the commands need to be executed in the follow
 | node src/queries/insert-data/notification.js | Insert data to table notification |
 
 ## Notes
+
+- Avoid using reserved keywords (e.g., user table) to name tables, as this can cause syntax errors or unexpected behavior.
+- Always ensure that there is no semicolon or comma at the end of each query statement.
+- The type definition of a column must be initialized before creating the table that contains the column.
+- When inserting data into a table, avoid duplication by using the condition `user_id NOT IN (SELECT user_id FROM doctor)` to filter out duplicate IDs.
+- NULL Handling Issues: Do not compare `NULL` values directly with `=.` Instead, use `IS NULL` or `IS NOT NULL` to check for `NULL` values.
+- Data Type Mismatch: Ensure that the data being inserted matches the column's defined data type.
+- To avoid conflicts in relationships between tables, create entity tables first and then define the relationships within the database.
