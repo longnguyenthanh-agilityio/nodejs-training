@@ -21,7 +21,6 @@ export const insertPatients = async (count = 10) => {
       };
     });
 
-    // Step 3: Insert into the patient table
     const insertQueries = patientData.map(
       (patient) =>
         sql`

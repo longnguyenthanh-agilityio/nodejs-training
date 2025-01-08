@@ -18,7 +18,7 @@ const insertPayments = async (count = 10) => {
     // Insert payments
     const promises = existingTransactionIdSet.map(({ id: transactionId }) => {
       const id = faker.string.uuid();
-      const amount = faker.finance.amount(50, 550, 2); // Random amount between 50 and 550
+      const amount = faker.finance.amount(50, 550, 2);
       const payment_date = faker.date.future();
       const payment_method = faker.helpers.arrayElement(paymentMethods);
       const status = faker.helpers.arrayElement(paymentStatus);

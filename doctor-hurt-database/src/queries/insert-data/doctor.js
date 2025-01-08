@@ -30,7 +30,6 @@ export const insertDoctors = async (count = 10) => {
       };
     });
 
-    // Step 3: Insert into the doctor table
     const insertQueries = doctorData.map(
       (d) =>
         sql`

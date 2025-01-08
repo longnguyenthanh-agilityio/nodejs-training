@@ -3,7 +3,6 @@ import { faker } from "@faker-js/faker";
 
 const insertNotifications = async (count = 10) => {
   try {
-    // Step 1: Fetch user IDs to maintain relationships
     const userIds = await sql`SELECT user_id FROM "user"`;
 
     if (userIds.length === 0) {
@@ -11,7 +10,6 @@ const insertNotifications = async (count = 10) => {
       return await sql.end();
     }
 
-    // Step 2: Insert notifications
     const promises = Array.from({ length: count }, async () => {
       const id = faker.string.uuid();
       const user_id = faker.helpers.arrayElement(userIds).user_id;
